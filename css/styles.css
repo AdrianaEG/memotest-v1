@@ -4,6 +4,7 @@
   grid-template-columns: 80%;
   justify-content: center;
 }
+.contenedor header {
   display: grid;
   grid-template-columns: 80% auto;
   justify-content: space-between;
