@@ -1,0 +1,6 @@
+.contenedor {
+  display: grid;
+  grid-template-rows: repeat(3, auto);
+  grid-template-columns: 80%;
+  justify-content: center;
+}
