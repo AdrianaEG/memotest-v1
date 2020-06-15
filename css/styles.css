@@ -26,7 +26,7 @@
   grid-template-rows: repeat(4, auto);
   grid-template-columns: repeat(5, auto);
 }
-.contenedor main button {
+.contenedor main div {
   background-color: red;
   height: 100px;
   width: 80%;
