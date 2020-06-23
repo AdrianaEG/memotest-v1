@@ -1,10 +1,11 @@
 .contenedor {
   display: grid;
   grid-template-rows: repeat(3, auto);
-  grid-template-columns: 80%;
+  grid-template-columns: 100%;
   justify-content: center;
 }
 .contenedor header {
+  margin: 0 50px;
   display: grid;
   grid-template-columns: 80% auto;
   justify-content: space-between;
@@ -21,6 +22,7 @@
   height: 50px;
 }
 .contenedor section {
+  margin: 0 50px;
   display: grid;
   grid-template-columns: 40% 60%;
 }
@@ -32,9 +34,9 @@
 }
 .contenedor main div {
   background-color: red;
-  height: 3rem;
-  width: 80%;
-  margin-top: 5px;
+  height: 100px;
+  width: auto;
+  margin: 5px;
 }
 
 /*# sourceMappingURL=styles.css.map */
