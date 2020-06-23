@@ -1,6 +1,6 @@
 $btnComenzarReiniciar = document.querySelector('#btn-comenzar-reiniciar');
 $btnComenzarReiniciar.addEventListener('click', comenzarOReiniciar);
-let arregloConImagenes = ['green', 'yellow', 'orange', 'blue', 'black', 'white', 'brown', 'violet', 'grey', 'pink','green', 'yellow', 'orange', 'blue', 'black', 'white', 'brown', 'violet', 'grey', 'pink'];
+let arregloConImagenes = ['imagen-01', 'imagen-02', 'imagen-03', 'imagen-04', 'imagen-05', 'imagen-06', 'imagen-07', 'imagen-08', 'imagen-09', 'imagen-10','imagen-01', 'imagen-02', 'imagen-03', 'imagen-04', 'imagen-05', 'imagen-06', 'imagen-07', 'imagen-08', 'imagen-09', 'imagen-10'];
 
 function comenzarOReiniciar(){
     let cantidadIntentos = 0;
@@ -21,7 +21,9 @@ let darImagenALosElementos = (elementos, arregloConClases)=>{
 }
 
 let darVueltaTarjeta = (elemento, claseElementoClickeado)=>{
-    elemento.style.background = claseElementoClickeado;
+    //elemento.style.backgroundImage = 'url(img/imagen-01.jpg)'; si anda
+    //elemento.style.backgroundImage = `/memotest-v1/img${claseElementoClickeado}.jpg`;//claseElementoClickeado;no anda
+    elemento.style.backgroundImage = `url(img/${claseElementoClickeado}.jpg)`;
 }
 
 function permitirClickearTarjetas($tarjetas){
