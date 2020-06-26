@@ -5,13 +5,23 @@ let cantidadIntentos = 0;
 let exito = 0;
 
 function comenzarOReiniciar(){
+    document.querySelector('#intentos').innerHTML = ' '
+    exito = 0;
+    cantidadIntentos = 0;
     document.querySelector('#btn-comenzar-reiniciar').innerHTML = 'Reiniciar';
     let $todasLasTarjetas = document.querySelector('main').querySelectorAll('div');//nodeList
+    desbloquearTarjetas($todasLasTarjetas);
     limpiarTodasLasTarjetas($todasLasTarjetas);
     arregloConImagenes = desordenarArreglo(arregloConImagenes);
     darImagenALosElementos($todasLasTarjetas, arregloConImagenes);
     permitirClickearTarjetas($todasLasTarjetas, arregloConImagenes);
 }
+
+let desbloquearTarjetas = $tarjetas =>{
+    $tarjetas.forEach($tarjeta =>{
+        $tarjeta.style.pointerEvents = 'all';
+    });
+};
 
 let limpiarTodasLasTarjetas = $tarjetas =>{
     $tarjetas.forEach($tarjeta =>{
@@ -43,11 +53,12 @@ function permitirClickearTarjetas($tarjetas){
             elementosClickeados.push(elementoClickeado);
             let claseElementoClickeado = e.target.classList.value;
             darVueltaTarjeta(elementoClickeado, claseElementoClickeado);
-            console.log('cantidad de clicks ' + clicks);
+            //console.log('cantidad de clicks ' + clicks);
             clicks++;
             if(clicks == 2){
+                document.querySelector('#intentos').innerHTML = cantidadIntentos/2;
                 bloquearTarjetas($tarjetas);
-                console.log(hayCoincidencia(elementosClickeados));
+                //console.log(hayCoincidencia(elementosClickeados));
                 if(!hayCoincidencia(elementosClickeados)){
                     setTimeout(function(){
                         quitarImagen(elementosClickeados);
@@ -55,21 +66,29 @@ function permitirClickearTarjetas($tarjetas){
                     }, 600)
                 }
                 else{
+                    bloquearTarjetasParaSiempre(elementosClickeados);
                     exito++;
                     setTimeout(()=>{
                         permitirClickearTarjetas($tarjetas)
                     },600);
                 }
             }
-            console.log(`los aciertos: ${exito}`);
-            console.log(`la cantidad de intentos que lleva ${cantidadIntentos/2}`);
+            if(exito == 10){
+                bloquearTarjetas($tarjetas);
+                console.log('GANASTE GUACHIS');
+            }
         };
     });
 }
 
+function bloquearTarjetasParaSiempre(elementos){
+    for(let i=0; i<elementos.length; i++){
+        elementos[i].style.pointerEvents = 'none';
+    }
+}
+
 function bloquearElementoClickeado(elemento){
     elemento.onclick = function(){
-
     }
 }
 
