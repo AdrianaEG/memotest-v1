@@ -33,7 +33,8 @@
   grid-template-columns: repeat(5, auto);
 }
 .contenedor main div {
-  background-color: red;
+  background-color: #feae96;
+  background-image: linear-gradient(315deg, #feae96 0%, #fe0944 74%);
   height: 100px;
   width: auto;
   margin: 5px;
