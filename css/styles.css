@@ -23,8 +23,12 @@
 }
 .contenedor section {
   margin: 0 50px;
-  display: grid;
-  grid-template-columns: 40% 60%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.contenedor section .contenedor-intentos #intentos {
+  display: inline-flex;
 }
 .contenedor main {
   margin-top: 10px;
