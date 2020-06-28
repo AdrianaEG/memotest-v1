@@ -3,8 +3,16 @@ $btnComenzarReiniciar.addEventListener('click', comenzarOReiniciar);
 let arregloConImagenes = ['imagen-01', 'imagen-02', 'imagen-03', 'imagen-04', 'imagen-05', 'imagen-06', 'imagen-07', 'imagen-08', 'imagen-09', 'imagen-10','imagen-01', 'imagen-02', 'imagen-03', 'imagen-04', 'imagen-05', 'imagen-06', 'imagen-07', 'imagen-08', 'imagen-09', 'imagen-10'];
 let cantidadIntentos = 0;
 let exito = 0;
+let funcionSegundos;
+let contenedorTiempo = document.querySelector('#tiempo');
+let segundos = 0;
+let minutos = 0;
 
 function comenzarOReiniciar(){
+    segundos = 0;
+    minutos = 0;
+    detenerTiempo();
+    comenzarTiempo();
     document.querySelector('#intentos').innerHTML = ' '
     exito = 0;
     cantidadIntentos = 0;
@@ -75,10 +83,17 @@ function permitirClickearTarjetas($tarjetas){
             }
             if(exito == 10){
                 bloquearTarjetas($tarjetas);
-                console.log('GANASTE GUACHIS');
+                detenerTiempo();
+                avisarQueGano();
             }
         };
     });
+}
+
+function avisarQueGano(){
+    console.log('CHE QUE BUENO, GANASTEEE!!!');
+    console.log("Tu tiempo fue " + minutos + " minutos " + segundos + " segundos ");
+    console.log('cantidad de intentos ' + cantidadIntentos/2);
 }
 
 function bloquearTarjetasParaSiempre(elementos){
@@ -122,4 +137,29 @@ function desordenarArreglo(arreglo){
         arreglo.push(auxiliar);
     }
     return arreglo;
+}
+
+function sumarSegundosMinutos(){
+    if(segundos === 59){
+        segundos = 0;
+        minutos++;
+        contenedorTiempo.innerHTML = minutos + 'min, ' + segundos + 'seg';
+    }
+    else{
+        segundos++;
+        if(minutos>0){
+            contenedorTiempo.innerHTML = minutos + 'min, ' + segundos + 'seg';
+        }
+        else{
+            contenedorTiempo.innerHTML = segundos + ' seg';
+        }
+    }
+}
+
+function comenzarTiempo(){
+    funcionSegundos = setInterval(sumarSegundosMinutos, 1000);
+}
+
+function detenerTiempo(){
+    clearInterval(funcionSegundos);
 }
