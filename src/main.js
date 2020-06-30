@@ -56,6 +56,8 @@ function permitirClickearTarjetas($tarjetas){
     $tarjetas.forEach($tarjeta =>{
         $tarjeta.onclick = function(e){
             let elementoClickeado = e.target;
+            darEfectoAlGirar(elementoClickeado);
+            quitarEfecto(elementoClickeado);
             cantidadIntentos++;
             bloquearElementoClickeado(elementoClickeado);
             elementosClickeados.push(elementoClickeado);
@@ -71,14 +73,14 @@ function permitirClickearTarjetas($tarjetas){
                     setTimeout(function(){
                         quitarImagen(elementosClickeados);
                         permitirClickearTarjetas($tarjetas);
-                    }, 600)
+                    }, 1000);
                 }
                 else{
                     bloquearTarjetasParaSiempre(elementosClickeados);
                     exito++;
                     setTimeout(()=>{
                         permitirClickearTarjetas($tarjetas)
-                    },600);
+                    },800);
                 }
             }
             if(exito == 10){
@@ -89,6 +91,19 @@ function permitirClickearTarjetas($tarjetas){
         };
     });
 }
+
+function darEfectoAlGirar(tarjeta){
+    tarjeta.style.transition = "all 0.7s ease";
+    tarjeta.style.transform = "rotateY(360deg)";
+}
+
+function quitarEfecto(tarjeta){
+    setTimeout(function () {
+        tarjeta.style.transition = '';
+        tarjeta.style.transform = '';
+    }, 1000);
+}
+
 
 function avisarQueGano(){
     console.log('CHE QUE BUENO, GANASTEEE!!!');
