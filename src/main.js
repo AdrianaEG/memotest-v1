@@ -1,5 +1,12 @@
-$btnComenzarReiniciar = document.querySelector('#btn-comenzar-reiniciar');
+$(document).ready(function(){
+    $('#myModal').modal('show');
+})
+
+
+const $btnComenzarReiniciar = document.querySelector('#btn-comenzar-reiniciar');
 $btnComenzarReiniciar.addEventListener('click', comenzarOReiniciar);
+const $btnSonido = document.querySelector('#contenedor-volumen');
+$btnSonido.addEventListener('click', controlarSonido);
 let arregloConImagenes = ['imagen-01', 'imagen-02', 'imagen-03', 'imagen-04', 'imagen-05', 'imagen-06', 'imagen-07', 'imagen-08', 'imagen-09', 'imagen-10','imagen-01', 'imagen-02', 'imagen-03', 'imagen-04', 'imagen-05', 'imagen-06', 'imagen-07', 'imagen-08', 'imagen-09', 'imagen-10'];
 let cantidadIntentos = 0;
 let exito = 0;
@@ -8,7 +15,28 @@ let contenedorTiempo = document.querySelector('#tiempo');
 let segundos = 0;
 let minutos = 0;
 
+function controlarSonido(){
+    if(document.querySelector('i').classList.value == 'fas fa-volume-up'){
+        reproducirMusica();
+    }
+    else{
+        detenerSonido();
+    }
+}
+
+const reproducirMusica = () =>{
+    document.querySelector('#audio').play();
+    document.querySelector('#audio').loop = true;
+    document.querySelector('i').classList.value = 'fas fa-volume-mute';
+}
+
+function detenerSonido(){
+    document.querySelector('#audio').pause();
+    document.querySelector('i').classList.value = 'fas fa-volume-up';
+}
+
 function comenzarOReiniciar(){
+    reproducirMusica();
     segundos = 0;
     minutos = 0;
     detenerTiempo();
@@ -85,6 +113,7 @@ function permitirClickearTarjetas($tarjetas){
             }
             if(exito == 10){
                 bloquearTarjetas($tarjetas);
+                detenerSonido();
                 detenerTiempo();
                 avisarQueGano();
             }
@@ -106,9 +135,11 @@ function quitarEfecto(tarjeta){
 
 
 function avisarQueGano(){
-    console.log('CHE QUE BUENO, GANASTEEE!!!');
-    console.log("Tu tiempo fue " + minutos + " minutos " + segundos + " segundos ");
-    console.log('cantidad de intentos ' + cantidadIntentos/2);
+    setTimeout(function(){
+        $('#modalGanador').modal('show');
+        document.querySelector('#tiempoGanador').innerHTML += document.querySelector('#tiempo').innerHTML;
+        document.querySelector('#intentosGanador'). innerHTML += document.querySelector('#intentos').innerHTML;
+    }, 500);    
 }
 
 function bloquearTarjetasParaSiempre(elementos){

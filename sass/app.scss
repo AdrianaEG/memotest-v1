@@ -6,6 +6,14 @@
     color: #ffffff;
 }
 
+audio{
+    display: none;
+}
+
+.modal-title{
+    text-align: center;
+}
+
 .contenedor{
     display: grid;
     grid-template-rows: repeat(3, auto);
